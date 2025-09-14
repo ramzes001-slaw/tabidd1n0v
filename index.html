@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mening Saytim — O'yinlar va Portfolio</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <meta name="color-scheme" content="dark light">
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-grid">
+      <div class="brand">
+        <a href="#/" class="logo">Mening<span>Saytim</span></a>
+      </div>
+
+      <div class="lang-switch">
+        <button class="lang" data-lang="uz">UZ</button>
+        <button class="lang" data-lang="en">EN</button>
+        <button class="lang" data-lang="ru">RU</button>
+      </div>
+
+      <nav class="main-nav">
+        <a href="#/" data-link data-key="home">Bosh sahifa</a>
+        <a href="#/about" data-link data-key="about">Men haqimda</a>
+        <a href="#/games" data-link data-key="games">O'yinlarim</a>
+        <a href="#/contact" data-link data-key="contact">Aloqa</a>
+      </nav>
+
+      <div class="socials">
+        <!-- REPLACE with your real links -->
+        <a id="ig" href="https://instagram.com/" target="_blank" aria-label="instagram">IG</a>
+        <a id="yt" href="https://youtube.com/" target="_blank" aria-label="youtube">YT</a>
+        <a id="tg" href="https://t.me/" target="_blank" aria-label="telegram">TG</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="view" class="container"></main>
+
+  <!-- TEMPLATES -->
+
+  <template id="homeTpl">
+    <section class="hero card">
+      <div class="hero-left">
+        <h1 data-key="hero_title">Salom! Menimcha bu juda ajoyib sayt</h1>
+        <p data-key="hero_sub">O‘yinlar, loyihalar va kontaktlar — hammasi shu yerda.</p>
+        <div class="hero-cta">
+          <a href="#/games" class="btn" data-key="play">O'ynash</a>
+          <a href="#/about" class="btn ghost" data-key="learn">Ko'proq</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="profile-placeholder.jpg" alt="profile" id="profileImg" /> <!-- REPLACE with your photo -->
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature card">
+        <h3 data-key="f1_title">O‘yinlar</h3>
+        <p data-key="f1_desc">Top o‘yinlar va yangi loyihalar — doimiy yangilanadi.</p>
+      </div>
+      <div class="feature card">
+        <h3 data-key="f2_title">Portfolio</h3>
+        <p data-key="f2_desc">Eng yaxshi ishlarimni ko‘ring.</p>
+      </div>
+      <div class="feature card">
+        <h3 data-key="f3_title">Kontakt</h3>
+        <p data-key="f3_desc">Bog‘lanish uchun ijtimoiy tarmoqlar va forma.</p>
+      </div>
+    </section>
+  </template>
+
+  <template id="aboutTpl">
+    <section class="about card about-grid">
+      <div class="about-photo">
+        <img src="profile-placeholder.jpg" alt="Profil rasm" id="aboutPhoto" /> <!-- REPLACE -->
+      </div>
+      <div class="about-content">
+        <h2 data-key="about_title">Men haqimda</h2>
+        <p data-key="about_text">Bu yerga qisqacha bio: kimligingiz, qiziqishlaringiz, texnologiyalaringiz va boshqa ma'lumotlar.</p>
+
+        <div class="about-links">
+          <a id="aboutIg" href="https://instagram.com/" target="_blank">Instagram</a>
+          <a id="aboutYt" href="https://youtube.com/" target="_blank">YouTube</a>
+          <a id="aboutTg" href="https://t.me/" target="_blank">Telegram</a>
+        </div>
+
+        <div class="skills">
+          <h4 data-key="skills">Ko'nikmalar</h4>
+          <div class="skill-list">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Canvas</span><span>UI/UX</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="gamesTpl">
+    <section class="games card">
+      <div class="games-header">
+        <h2 data-key="games_title">O‘yinlarim</h2>
+        <div class="game-filters">
+          <select id="gameSelect">
+            <option value="catch" data-key="g_catch">Bloklarni tut</option>
+            <option value="dodge" data-key="g_dodge">Dodge — qoch</option>
+            <option value="asteroid" data-key="g_asteroid">Kosmik urush</option>
+          </select>
+          <button id="launchGame" class="btn" data-key="launch">O'ynash</button>
+        </div>
+      </div>
+      <div id="gamesList" class="posts-list">
+        <!-- cards auto-inserted via JS -->
+      </div>
+    </section>
+  </template>
+
+  <template id="gameTpl">
+    <section class="game card">
+      <div class="game-top">
+        <button id="backBtn" class="btn ghost" data-key="back">Orqaga</button>
+        <div class="game-info"><span data-key="score">Ball</span>: <span id="gscore">0</span></div>
+        <button id="pauseBtn" class="btn ghost" data-key="pause">To'xtatish</button>
+      </div>
+      <canvas id="gameCanvas" width="800" height="450"></canvas>
+      <div class="game-hint" id="gameHint" data-key="game_hint">Sichqoncha bilan boshqaring yoki klaviatura: ← →</div>
+    </section>
+  </template>
+
+  <template id="contactTpl">
+    <section class="card contact">
+      <h2 data-key="contact_title">Aloqa</h2>
+      <form id="contactForm">
+        <input id="cname" placeholder="Ismingiz" required />
+        <input id="cemail" placeholder="Email" type="email" required />
+        <textarea id="cmsg" placeholder="Xabaringiz" rows="6"></textarea>
+        <div class="form-actions">
+          <button class="btn" type="submit" data-key="send">Yuborish</button>
+        </div>
+      </form>
+    </section>
+  </template>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4 data-key="footer_about">MeningSaytim</h4>
+        <p data-key="footer_sub">Ijod, o'yin va texnologiyalar.</p>
+      </div>
+      <div class="footer-socials">
+        <a id="fIg" href="https://instagram.com/" target="_blank">Instagram</a>
+        <a id="fYt" href="https://youtube.com/" target="_blank">YouTube</a>
+        <a id="fTg" href="https://t.me/" target="_blank">Telegram</a>
+      </div>
+      <div>
+        <small>© <span id="year"></span> MeningSaytim</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./css/js/main.js" defer></script>
+</body>
+</html>
